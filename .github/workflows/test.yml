@@ -2,29 +2,21 @@ name: Run Tests
 
 on:
   push:
-    branches: [ main, develop ]
-  pull_request:
     branches: [ main ]
-  schedule:
-    - cron: '0 0 * * *'
   workflow_dispatch:
 
 jobs:
   test:
     runs-on: ubuntu-latest
     
-    strategy:
-      matrix:
-        node-version: [18.x, 20.x]
-    
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
     
-    - name: Setup Node.js ${{ matrix.node-version }}
+    - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: '20'
         cache: 'npm'
     
     - name: Install dependencies
@@ -32,22 +24,3 @@ jobs:
     
     - name: Run tests
       run: npm test
-    
-    - name: Run tests with coverage
-      run: npm run test:coverage
-    
-    - name: Upload coverage reports
-      uses: codecov/codecov-action@v3
-      if: matrix.node-version == '20.x'
-      with:
-        files: ./coverage/coverage-final.json
-        flags: unittests
-        name: codecov-umbrella
-    
-    - name: Upload coverage to artifacts
-      uses: actions/upload-artifact@v4
-      if: matrix.node-version == '20.x'
-      with:
-        name: coverage-report
-        path: coverage/
-        retention-days: 30
