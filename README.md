@@ -10,6 +10,7 @@
 - **代码高亮**: Highlight.js + Toast UI Editor插件
 - **Markdown解析**: Marked.js
 - **构建工具**: Webpack + Babel
+- **测试框架**: Jest + React Testing Library + Supertest
 - **存储**: 本地JSON文件存储 + 图片文件存储
 
 ## 功能特性
@@ -24,6 +25,7 @@
 - ✅ 文档列表管理
 - ✅ 响应式设计
 - ✅ 本地数据持久化
+- ✅ 自动化测试（Jest）
 
 ## 代码语法高亮
 
@@ -275,6 +277,56 @@ npm run build:dev
 ```bash
 npm start
 ```
+
+## 测试
+
+项目包含完整的单元测试，覆盖前端和后端功能。
+
+### 运行测试
+
+```bash
+# 运行所有测试
+npm test
+
+# 运行测试并监听文件变化
+npm run test:watch
+
+# 运行测试并生成覆盖率报告
+npm run test:coverage
+```
+
+### 测试覆盖率
+
+测试覆盖率配置：
+- **分支覆盖率**: ≥ 50%
+- **函数覆盖率**: ≥ 50%
+- **行覆盖率**: ≥ 50%
+- **语句覆盖率**: ≥ 50%
+
+测试文件位于：
+- `client/App.test.js` - 前端组件测试
+- `server/index.test.js` - 后端 API 测试
+
+### 测试框架
+
+- **Jest**: JavaScript 测试框架
+- **React Testing Library**: React 组件测试
+- **Supertest**: HTTP API 测试
+- **jsdom**: 浏览器环境模拟
+
+### GitHub Actions
+
+项目配置了 GitHub Actions 自动化测试：
+- **触发条件**: 
+  - Push 到 main 或 develop 分支
+  - Pull Request 到 main 分支
+  - 每天 UTC 时间 00:00 定时执行
+  - 手动触发 (workflow_dispatch)
+- **测试环境**: Ubuntu 最新版本
+- **Node.js 版本**: 18.x 和 20.x (矩阵测试)
+- **覆盖率上传**: 自动上传到 Codecov
+
+测试状态和覆盖率报告可在 GitHub Actions 中查看。
 
 ## 注意事项
 
