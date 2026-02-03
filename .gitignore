@@ -18,6 +18,10 @@ uploads/
 .env.*.local
 .config
 
+# GitHub workflows (需要workflow权限才能推送)
+# 如果没有workflow权限，可以将这些文件添加到这里
+.github/workflows/
+
 # Logs
 *.log
 npm-debug.log*
