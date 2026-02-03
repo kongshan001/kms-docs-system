@@ -16,6 +16,7 @@ uploads/
 .env
 .env.local
 .env.*.local
+.config
 
 # Logs
 *.log
